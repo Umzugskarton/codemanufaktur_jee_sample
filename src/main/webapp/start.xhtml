@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition template="/template.xhtml">
+    <ui:define name="head">
+        <title>Codemanufaktur Sample JEE</title>
+        <!-- Custom styles for this template -->
+    </ui:define>
+    <ui:define name="body">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div></div>
+                <a class="navbar-brand brand" href="#">
+                    <img style="vertical-align: unset"
+                         src="${facesContext.externalContext.requestContextPath}/img/logo.svg"
+                         width="150"/></a>
+                <button class="navbar-toggler temp-btn" type="button" data-toggle="collapse"
+                        data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse justify-content-end mobile-mt-4" id="navbarNavDropdown">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.xhtml">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <br/>
+        <h:panelGroup layout="block" styleClass="container" rendered="#{empty user}">
+            <div class="jumbotron">
+                <h1>Login - Fabian Rieger JavaEE Sample </h1>
+                <p class="lead">Willkommen JavaEE Usermanagement Architektur Demonstration. </p>
+
+                <div class="container">
+                    <h:form endered="#{ empty user}">
+                        <div class="form-group">
+                            <h4>Login</h4>
+                            <h:outputLabel value="Email"/>
+                            <h:inputText styleClass="form-control" id="email" value="#{loginBean.email}"></h:inputText>
+                            <h:message for="email"></h:message>
+                            <small id="emailHelp"
+                                   class="form-text text-muted">We'll never share your email with anyone else.
+                            </small>
+                            <br></br><br></br>
+
+                            <h:outputLabel value="Password"/>
+                            <h:inputSecret styleClass="form-control" id="password"
+                                           value="#{loginBean.password}"></h:inputSecret>
+                            <h:message for="password"></h:message>
+                            <br></br><br></br>
+
+                            <h:commandButton styleClass="btn btn-primary" action="#{loginBean.login}"
+                                             value="Login"></h:commandButton>
+                        </div>
+                    </h:form>
+                    <h:panelGroup layout="block" styleClass="alert #{loginBean.statusColor}"
+                                  rendered="#{loginBean.status!=null}" role="alert" id="logstat">
+                        <h:outputFormat value="#{loginBean.status}"/>
+                    </h:panelGroup>
+                </div>
+            </div>
+        <!-- /.container -->
+        <br></br><br></br>
+        </h:panelGroup>
+        <h:panelGroup layout="block" styleClass="container" rendered="#{not empty user}">
+            <h:panelGroup layout="block" styleClass="jumbotron">
+                <h1>Welcome, #{user.name}</h1>
+                <h:form>
+                    <h:commandButton styleClass="btn btn-primary" value="logout" action="#{loginBean.logout}"/>
+                </h:form>
+            </h:panelGroup>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>
+</html>
