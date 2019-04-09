@@ -1,4 +1,4 @@
-# codemanufaktur_jee_sample
+# Jee_sample
 
 Ein Code Beispiel zu JavaEE mit Java Server Faces 
 
